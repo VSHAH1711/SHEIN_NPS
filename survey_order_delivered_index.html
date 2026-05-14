@@ -80,193 +80,29 @@ body{font-family:'DM Sans',sans-serif;background:#0d1f1a;min-height:100vh;overfl
   <div class="handle"></div>
   <div class="logo-bar">
     <div class="logo">SH<span>EI</span>N</div>
-    <div class="logo-tagline">How are we doing? 👀</div>
-  </div>
-  <div class="ctx-banner">
-    <div class="ctx-icon">📦</div>
-    <div class="ctx-text"><strong>Your order was delivered!</strong>You have it in your hands — tell us everything?</div>
+    <div class="logo-tagline">Update</div>
   </div>
 
-  <div id="panel">
-    <div class="card">
-      <div class="tp-tag">📦 Order delivered</div>
-      <div class="survey-title">How was the delivery and the product?</div>
-      <div class="survey-sub">Takes ~15 secs ⚡ your honest take matters</div>
-      <div class="nps-core-q">On a scale of 0–10, how likely are you to recommend Shein to a friend or family member?<span class="nps-core-hint">0 = Not at all likely &nbsp;·&nbsp; 10 = Extremely likely</span></div>
-      <div class="nps-label-row"><span class="nps-lbl">0 😤 Not likely</span><span class="nps-lbl">Absolutely 😍 10</span></div>
-      <div class="nps-scores" id="scores"></div>
-      <div class="divider"></div>
-
-      <div id="tags-det" class="qtag-section" style="display:none;">
-        <div class="section-label">WHAT DISAPPOINTED YOU? (tap a tag to add it below)</div>
-        <div class="qtag-wrap">
-          <button class="qtag" onclick="toggleTag(this,'Delivery took too long')">⏰ Delivery took too long</button>
-          <button class="qtag" onclick="toggleTag(this,'Packaging was damaged')">📦 Packaging was damaged</button>
-          <button class="qtag" onclick="toggleTag(this,'Wrong item delivered')">❌ Wrong item delivered</button>
-          <button class="qtag" onclick="toggleTag(this,'Item was missing')">🔍 Item was missing</button>
-          <button class="qtag" onclick="toggleTag(this,'Fabric quality was poor')">🧵 Fabric quality was poor</button>
-          <button class="qtag" onclick="toggleTag(this,'Product did not match the photos')">📸 Product did not match the photos</button>
-          <button class="qtag" onclick="toggleTag(this,'Sizing was way off')">📏 Sizing was way off</button>
-          <button class="qtag" onclick="toggleTag(this,'Stitching was bad')">🪡 Stitching was bad</button>
-        </div>
-      </div>
-      <div id="tags-pas" class="qtag-section" style="display:none;">
-        <div class="section-label">WHAT COULD HAVE BEEN BETTER? (tap a tag to add it below)</div>
-        <div class="qtag-wrap">
-          <button class="qtag" onclick="toggleTag(this,'Delivery could be a bit faster')">⏩ Delivery could be a bit faster</button>
-          <button class="qtag" onclick="toggleTag(this,'Packaging could be better')">📦 Packaging could be better</button>
-          <button class="qtag" onclick="toggleTag(this,'Fabric felt slightly cheap')">🧵 Fabric felt slightly cheap</button>
-          <button class="qtag" onclick="toggleTag(this,'Colors were slightly off')">🎨 Colors were slightly off</button>
-          <button class="qtag" onclick="toggleTag(this,'Sizing runs small or large')">📐 Sizing runs small or large</button>
-          <button class="qtag" onclick="toggleTag(this,'More tracking updates needed')">📲 More tracking updates needed</button>
-        </div>
-      </div>
-      <div id="tags-pro" class="qtag-section" style="display:none;">
-        <div class="section-label">WHAT IMPRESSED YOU? 💚 (tap a tag to add it below)</div>
-        <div class="qtag-wrap">
-          <button class="qtag" onclick="toggleTag(this,'Super fast delivery')">🚀 Super fast delivery</button>
-          <button class="qtag" onclick="toggleTag(this,'Packaging was perfect')">📦 Packaging was perfect</button>
-          <button class="qtag" onclick="toggleTag(this,'Great fabric quality')">🧵 Great fabric quality</button>
-          <button class="qtag" onclick="toggleTag(this,'Looked exactly like the photos')">✅ Looked exactly like the photos</button>
-          <button class="qtag" onclick="toggleTag(this,'Fit was perfect')">🎯 Fit was perfect</button>
-          <button class="qtag" onclick="toggleTag(this,'Loved the finish and detailing')">✨ Loved the finish and detailing</button>
-        </div>
-      </div>
-
-      <div class="section-label" style="margin-top:6px;">YOUR THOUGHTS (optional)</div>
-      <div class="tag-hint">✦ Tap any tag above to add it here, then type your raw thoughts</div>
-      <textarea class="comment-box" id="comment" placeholder="Tap tags above or write freely... we are all ears 👂" oninput="updateChar()"></textarea>
-      <div class="char-count" id="charCount">0 / 300</div>
-      <button class="submit-btn" id="submitBtn" onclick="submitSurvey()">Send feedback ✨</button>
+  <div class="done-screen" style="display: block;">
+    <div class="done-icon">🔒</div>
+    <div class="done-title">Survey Closed</div>
+    <div class="done-sub">
+      Thank you for your interest! This feedback form is no longer accepting responses. 
+      We appreciate your support.
     </div>
-  </div>
-
-  <div class="done-screen" id="doneScreen">
-    <div class="done-icon">📦</div>
-    <div class="done-title">Feedback received! ✅</div>
-    <div class="done-sub">Your delivery and product experience just helped us level up. Grab your reward 🎁</div>
-    <div class="reward-pill">
-      <div class="reward-code">DELIVER10</div>
-      <div class="reward-fine">10% off your next order • Valid 5 days</div>
+    
+    <div class="reward-pill" style="border-color: #bbb; background: #f0f0f0;">
+      <div class="reward-code" style="color: #888; letter-spacing: normal; font-size: 16px;">
+        Session Expired
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-// ─── CONFIG — paste your Apps Script Web App URL below ───────────────────────
-const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwxggBJka7IhgsZWLThae_9aYO-IoJNMMyXgxJfQV3VCRvos8gSVzU3SZqvRNoW9bFS/exec';
-// ─────────────────────────────────────────────────────────────────────────────
-
-const _orderId = new URLSearchParams(window.location.search).get('oid') || 'unknown';
-let currentScore = null;
-
-(function buildScores(){
-  const wrap = document.getElementById('scores');
-  for(let i = 0; i <= 10; i++){
-    const b = document.createElement('button');
-    b.className='sc-btn'; b.textContent=i; b.dataset.v=i;
-    b.onclick = () => selectScore(i, b);
-    wrap.appendChild(b);
-  }
-})();
-
-function scoreColor(v){ return v<=6?'#ef4444':v<=8?'#f59e0b':'#10b981'; }
-
-function selectScore(val, btn){
-  currentScore = val;
-  document.getElementById('scores').querySelectorAll('.sc-btn').forEach(b => {
-    const bv = +b.dataset.v;
-    if(bv<=val){ b.classList.add('sel'); b.style.background=scoreColor(bv); b.style.color='#fff'; }
-    else { b.classList.remove('sel'); b.style.background=''; b.style.color=''; }
-  });
-  ['det','pas','pro'].forEach(t => { document.getElementById('tags-'+t).style.display='none'; });
-  document.querySelectorAll('.qtag').forEach(t => t.classList.remove('sel','sel-green','sel-amber','sel-red'));
-  const section = val<=6?'det':val<=8?'pas':'pro';
-  document.getElementById('tags-'+section).style.display='block';
-  document.getElementById('submitBtn').classList.add('ready');
-  spawnXP(btn, '+10 XP');
-}
-
-function toggleTag(btn, tagText){
-  if(currentScore===null) return;
-  const wasSelected = btn.classList.contains('sel');
-  btn.classList.toggle('sel');
-  if(!wasSelected){
-    if(currentScore>=9) btn.classList.add('sel-green');
-    else if(currentScore>=7) btn.classList.add('sel-amber');
-    else btn.classList.add('sel-red');
-  } else { btn.classList.remove('sel-green','sel-amber','sel-red'); }
-  const box = document.getElementById('comment');
-  if(!wasSelected){
-    const cur = box.value.trim();
-    box.value = cur==='' ? tagText+' — ' : cur.replace(/[—,\s]+$/,'')+', '+tagText+' — ';
-    box.focus(); box.setSelectionRange(box.value.length, box.value.length);
-  } else {
-    let val = box.value;
-    [', '+tagText+' — ', tagText+' — ', ', '+tagText, tagText+', ', tagText].forEach(p => {
-      if(val.includes(p)){ val=val.replace(p,''); }
-    });
-    box.value = val;
-  }
-  updateChar();
-}
-
-function updateChar(){
-  const ta = document.getElementById('comment');
-  if(ta.value.length>300) ta.value=ta.value.substring(0,300);
-  document.getElementById('charCount').textContent=ta.value.length+' / 300';
-}
-
-function spawnXP(el, txt){
-  const r=el.getBoundingClientRect();
-  const fp=document.createElement('div'); fp.className='xp-float'; fp.textContent=txt;
-  fp.style.left=(r.left+r.width/2-24)+'px'; fp.style.top=(r.top-8)+'px';
-  document.body.appendChild(fp); setTimeout(()=>fp.remove(),1200);
-}
-
-function launchConfetti(){
-  const colors=['#06d6a0','#118ab2','#ffd166','#ff6b9d','#ff8e53','#a29bfe'];
-  const wrap=document.getElementById('confWrap'); wrap.innerHTML='';
-  for(let i=0;i<55;i++){
-    const c=document.createElement('div'); c.className='cpc';
-    c.style.left=Math.random()*100+'%';
-    c.style.background=colors[Math.floor(Math.random()*colors.length)];
-    c.style.animationDuration=(.65+Math.random()*1.3)+'s';
-    c.style.animationDelay=(Math.random()*.6)+'s';
-    c.style.borderRadius=Math.random()>.5?'50%':'3px';
-    wrap.appendChild(c);
-  }
-}
-
-async function submitSurvey(){
-  if(currentScore===null) return;
-  const btn=document.getElementById('submitBtn');
-  btn.classList.remove('ready'); btn.classList.add('loading');
-  btn.textContent='Sending... ⏳';
-
-  const selectedTags=[...document.querySelectorAll('.qtag.sel')].map(t=>t.textContent.trim());
-  const payload={
-    order_id: _orderId,
-    survey_type: 'order_delivered',
-    score: currentScore,
-    tags: selectedTags.join(', '),
-    comment: document.getElementById('comment').value,
-    submitted_at: new Date().toISOString()
-  };
-
-  try {
-    await fetch(WEBHOOK_URL, {
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(payload)
-    });
-  } catch(e){ console.warn('Submission error:', e); }
-
-  spawnXP(btn, '+50 XP 🎉');
-  document.getElementById('panel').style.display='none';
-  document.getElementById('doneScreen').classList.add('active');
-  launchConfetti();
-}
+  // All previous survey logic removed as the form is closed.
+  console.log("Survey is inactive.");
 </script>
+  
 </body>
 </html>
